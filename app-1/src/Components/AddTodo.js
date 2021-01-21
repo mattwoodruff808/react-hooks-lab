@@ -10,7 +10,9 @@ const AddTodo = (props) => {
 
     return (
         <div>
-            <input value={todo} placeholder='Enter Item' onChange={e => setTodo(e.target.value)} />
+            <input value={todo} 
+                   placeholder='Enter Item' 
+                   onChange={e => setTodo(e.target.value)} />
             <button onClick={() => handleAdd()}>Add Item</button>
         </div>
     )
