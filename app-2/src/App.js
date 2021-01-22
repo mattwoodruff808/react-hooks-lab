@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
+import ListItem from './Components/ListItem';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [pokemon, setPokemon] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://pokeapi.co/api/v2/pokemon').then((res) => {
+      setPokemon(res.data.results)
+    })
+  }, [])
+
+  const mappedPokemon = pokemon.map((el, i) => {
+    return <ListItem key={i} pokemon={el.name} />
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      {mappedPokemon}
     </div>
-  );
+  )
 }
 
 export default App;
